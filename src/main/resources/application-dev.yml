@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/myapp_prod
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://dpg-d81ciat0lvsc7399mqm0-a.oregon-postgres.render.com:5432/food_delvery_app
+    username: food_delvery_app_user
+    password: bneRXbwoToUiXzvYmfQGe809GIQ5hMY4
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
