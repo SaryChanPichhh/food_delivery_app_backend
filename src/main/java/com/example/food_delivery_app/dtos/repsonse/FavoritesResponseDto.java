@@ -1,0 +1,11 @@
+package com.example.food_delivery_app.dtos.repsonse;
+
+import lombok.Data;
+
+@Data
+public class FavoritesResponseDto {
+    private Long id;
+    private Long userId;
+    private Long resId;
+    private Long menuId;
+}
