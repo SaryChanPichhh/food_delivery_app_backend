@@ -1,14 +1,13 @@
 package com.example.food_delivery_app.repositories;
 
-import com.example.food_delivery_app.dtos.repsonse.RestaurantResponseDto;
+import com.example.food_delivery_app.dto.repsonse.RestaurantResponseDto;
 import com.example.food_delivery_app.models.CategoryModel;
-
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryModel, Integer> {

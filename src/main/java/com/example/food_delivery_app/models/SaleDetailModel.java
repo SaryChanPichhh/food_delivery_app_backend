@@ -1,11 +1,10 @@
 package com.example.food_delivery_app.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity

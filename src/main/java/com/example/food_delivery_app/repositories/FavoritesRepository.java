@@ -1,11 +1,10 @@
 package com.example.food_delivery_app.repositories;
 
-import java.util.List;
-
+import com.example.food_delivery_app.models.FavoritesModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.food_delivery_app.models.FavoritesModel;
+import java.util.List;
 @Repository
 public interface FavoritesRepository extends JpaRepository<FavoritesModel, Integer> {
     List<FavoritesModel> findByUserIdAndId(Long userId, Long menuId);

@@ -3,6 +3,7 @@ package com.example.food_delivery_app.repositories;
 import com.example.food_delivery_app.models.ReviewModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository

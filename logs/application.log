@@ -1,0 +1,5 @@
+2026-05-19T00:22:15.914+07:00  INFO 2464 --- [food_delivery_app] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-19T00:22:15.955+07:00  INFO 2464 --- [food_delivery_app] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-05-19T00:22:16.000+07:00  INFO 2464 --- [food_delivery_app] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-19T00:22:16.006+07:00  INFO 2464 --- [food_delivery_app] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-19T00:22:16.020+07:00  INFO 2464 --- [food_delivery_app] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

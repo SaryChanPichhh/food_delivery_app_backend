@@ -3,11 +3,22 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://dpg-d81ciat0lvsc7399mqm0-a.oregon-postgres.render.com:5432/food_delvery_app
-    username: food_delvery_app_user
-    password: bneRXbwoToUiXzvYmfQGe809GIQ5hMY4
+    url: jdbc:postgresql://localhost:5432/food_delivery_app
+    username: avengers
+    password: avengers123
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+  data:
+    redis:
+      url: rediss://red-d85a0begvqtc73blsb3g:Qd6sFCLiyjuhSnDhtXjZ7vPIiLESsJRd@oregon-keyvalue.render.com:6379
+      ssl:
+        enabled: true
+
+  cache:
+    type: redis
+jwt:
+  secret: mysecretkeymysecretkeymysecretkey123456
+  expiration: 86400000

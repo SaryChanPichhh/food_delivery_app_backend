@@ -3,3 +3,31 @@ spring:
     name: food_delivery_app
   profiles:
     active: dev
+
+logging:
+  level:
+    root: INFO
+    com.example: DEBUG
+  file:
+    name: logs/application.log
+  pattern:
+    console: >
+      {"time":"%d{yyyy-MM-dd HH:mm:ss}",
+      "level":"%level",
+      "class":"%logger{36}",
+      "message":"%msg"}%n
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+  metrics:
+    tags:
+      application: food-delivery-app
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true

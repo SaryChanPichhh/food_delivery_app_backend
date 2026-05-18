@@ -1,6 +1,6 @@
 package com.example.food_delivery_app.repositories;
 
-import com.example.food_delivery_app.dtos.repsonse.RestaurantResponseDto;
+import com.example.food_delivery_app.dto.repsonse.RestaurantResponseDto;
 import com.example.food_delivery_app.models.SaleHeaderModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

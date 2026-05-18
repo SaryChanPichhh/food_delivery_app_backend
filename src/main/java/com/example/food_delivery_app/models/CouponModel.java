@@ -1,6 +1,7 @@
 package com.example.food_delivery_app.models;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -38,8 +39,11 @@ public class CouponModel {
     
     @Enumerated(EnumType.STRING)
     private CouponStatus status;
-    
-    @Column(nullable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+
+    @Column(
+            nullable = false,
+            updatable = false
+    )
     private LocalDateTime createdAt;
     
     @Column(nullable = false)

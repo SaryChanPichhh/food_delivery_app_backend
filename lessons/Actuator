@@ -1,0 +1,31 @@
+What is Spring Boot Actuator?
+
+Actuator is a monitoring and management tool for Spring Boot applications.
+
+It helps you see:
+
+app health
+memory usage
+API metrics
+database status
+request statistics
+environment configs
+beans
+logs
+
+It is heavily used in production systems.
+
+Why Use Actuator?
+
+Without Actuator:
+
+You don't know:
+- Is app healthy?
+- Is DB connected?
+- How much memory used?
+- How many requests?
+- Which APIs are slow?
+
+With Actuator:
+
+You can monitor everything.

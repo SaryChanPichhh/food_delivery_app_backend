@@ -1,7 +1,8 @@
 package com.example.food_delivery_app.repositories;
 
-import com.example.food_delivery_app.dtos.repsonse.DiscountResponeDto;
-import com.example.food_delivery_app.models.CouponModel;
+ import com.example.food_delivery_app.dto.repsonse.MenuResponseDto;
+ import com.example.food_delivery_app.dto.repsonse.DiscountResponeDto;
+ import com.example.food_delivery_app.models.CouponModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -54,11 +55,11 @@ public interface CouponRepository extends JpaRepository<CouponModel, Long> {
         r.res_id AS resId,
         r.image_url AS imageUrl,
         r.rating AS rating,
-        IFNULL(s.qty,0) AS qty,
-        IFNULL(r.avg_estimate_time,'10-25 min') AS estimateTime,
+        COALESCE(s.qty,0) AS qty,
+        COALESCE(r.avg_estimate_time,'10-25 min') AS estimateTime,
         r.is_open AS isOpen,
         r.based_country AS basedCountry,
-		CAST(
+		(
     CASE 
         WHEN EXISTS (
             SELECT 1 
@@ -68,14 +69,14 @@ public interface CouponRepository extends JpaRepository<CouponModel, Long> {
         ) 
         THEN 1 
         ELSE 0 
-    END AS UNSIGNED
+    END::INTEGER
 ) AS isFav,
        (
     SELECT item_desc from sale_detail INNER JOIN restaurants on restaurants.res_id = sale_detail.res_id where sale_detail.res_id = r.res_id
 		GROUP BY sale_detail.res_id,item_desc ORDER BY SUM(qty) DESC LIMIT 1
-) AS popularDish,coupons.description as couponDesc,coupons.`code` as couponCode,coupons.discount_type as discountType
+) AS popularDish,coupons.description as couponDesc,coupons.code as couponCode,coupons.discount_type as discountType
 ,coupons.discount_value as discountValue,coupons.max_usage as maxUsage,coupons.min_order_amount as minAmount,
-coupons.start_date as startDate,coupons.end_date as endDate,coupons.`status` as status
+coupons.start_date as startDate,coupons.end_date as endDate,coupons.status as status
     FROM restaurants r
     INNER JOIN (
         SELECT ca.restaurant_id, MIN(ca.coupon_id) as coupon_id 
@@ -89,10 +90,37 @@ coupons.start_date as startDate,coupons.end_date as endDate,coupons.`status` as 
     INNER JOIN coupons ON coupons.coupon_id = ca.coupon_id 
     LEFT JOIN (SELECT COUNT(*) qty,res_id from sale_detail GROUP BY res_id) s 
         ON r.res_id = s.res_id
-    WHERE coupons.`status` = 'ACTIVE' 
+    WHERE coupons.status = 'ACTIVE' 
       AND coupons.start_date <= :now 
       AND coupons.end_date >= :now
-      AND (coupons.max_usage IS NULL OR IFNULL(coupons.used_count, 0) < coupons.max_usage)
+      AND (coupons.max_usage IS NULL OR COALESCE(coupons.used_count, 0) < coupons.max_usage)
             """,nativeQuery=true)
     List<DiscountResponeDto> getDiscountInfo(@Param("userId") int userId, @Param("now") LocalDateTime now);
+
+
+    @Query(value = """
+
+            select id menuId,menus.description , image,menus.name,price ,cate.cate_id cateId , cate."name" cateName
+           ,menus.res_id resId,res.res_name resName,coupons.code discountCode,coupons.description discountDescription
+           ,coupons.discount_type discountType,coupons.discount_value discountValue,coupons.min_order_amount minOrder,menus.rating
+           ,CAST(
+                       CASE\s
+                           WHEN EXISTS (
+                               SELECT 1\s
+                               FROM favorites f2\s
+                               WHERE f2.user_id = 1
+                                 AND f2.id = menus.id
+                           )\s
+                           THEN 1\s
+                           ELSE 0\s
+                       END AS INTEGER
+                   ) AS isFav
+           from menus inner join categories cate on cate.cate_id = menus.cate_id
+           inner join restaurants res on res.res_id = menus.res_id
+           inner join coupon_assignments ca on ca.menu_id = menus.id
+           inner join coupons on coupons.coupon_id = ca.coupon_id\s
+           where coupons.max_usage >= coupons.used_count
+           and coupons.start_date <=  NOW() and coupons.end_date >= NOW() and coupons.status = 'ACTIVE' ;
+            """,nativeQuery=true)
+    List<MenuResponseDto> getDiscountOnMenuInfo(@Param("userId") int userId, @Param("now") LocalDateTime now);
 }

@@ -26,4 +26,7 @@ public class RestaurantModel {
     private boolean isOpen;
     private String basedCountry;
     private double commissionRate; // Commission percentage (e.g., 10.0 for 10%)
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserModel user;
 }
