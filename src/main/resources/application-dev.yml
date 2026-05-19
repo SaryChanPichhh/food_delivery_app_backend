@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/food_delivery_app
-    username: avengers
-    password: avengers123
+    username: postgres
+    password: 1
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

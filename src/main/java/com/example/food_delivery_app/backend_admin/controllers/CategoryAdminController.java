@@ -1,7 +1,9 @@
 package com.example.food_delivery_app.backend_admin.controllers;
 
 import com.example.food_delivery_app.backend_admin.interfaces.ICategoryService;
+import com.example.food_delivery_app.dto.repsonse.ApiResponse;
 import com.example.food_delivery_app.models.CategoryModel;
+import com.example.food_delivery_app.shared.constants.ApiRoutes;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,16 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/backend/category")
+@RequestMapping(ApiRoutes.ADMIN_CATEGORIES)
 @AllArgsConstructor
-public class CategoryBackendController {
+public class CategoryAdminController {
     private final ICategoryService categoryService;
-
     @GetMapping
-    public Map<String, Object> index() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("categories", categoryService.GetData());
-        return response;
+    public ResponseEntity<?> index() {
+        var data = categoryService.GetData();
+        return ResponseEntity.ok(ApiResponse.builder().
+                success(true).message("fetch categories success").data(data).build());
     }
 
     @GetMapping("/create")
