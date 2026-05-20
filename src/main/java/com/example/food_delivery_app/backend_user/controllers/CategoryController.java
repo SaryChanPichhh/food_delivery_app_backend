@@ -2,6 +2,7 @@ package com.example.food_delivery_app.backend_user.controllers;
 
 import com.example.food_delivery_app.backend_admin.interfaces.ICategoryService;
 import com.example.food_delivery_app.dto.repsonse.ApiResponse;
+import com.example.food_delivery_app.shared.constants.ApiRoutes;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/categories")
+@RequestMapping(ApiRoutes.USER_CATEGORIES)
 public class CategoryController {
     private final ICategoryService _category;
 

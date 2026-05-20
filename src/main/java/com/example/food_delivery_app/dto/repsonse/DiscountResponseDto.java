@@ -3,7 +3,7 @@
 
 import java.time.LocalDateTime;
 
-public interface DiscountResponeDto extends RestaurantResponseDto {
+public interface DiscountResponseDto extends RestaurantResponseDto {
 
     String getCouponDesc();
     String getCouponCode();

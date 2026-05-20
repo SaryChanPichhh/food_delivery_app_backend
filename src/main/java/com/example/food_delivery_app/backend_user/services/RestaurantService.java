@@ -7,6 +7,7 @@ import com.example.food_delivery_app.repositories.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 @Service
@@ -42,6 +43,12 @@ public class RestaurantService implements IRestaurantService {
     public List<RestaurantResponseDto> GetPopularRestaurant(int userId) {
         var data = restaurantRepository.GetPopularRestaurant(userId);
         return data;
+    }
+
+    @Override
+    public List<RestaurantResponseDto> GetNewRestaurant(int userId) {
+        var data = restaurantRepository.GetNewRestaurants(userId);
+        return data.orElse(new ArrayList<>());
     }
 
     @Override

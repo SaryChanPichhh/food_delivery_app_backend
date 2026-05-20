@@ -3,7 +3,8 @@ package com.example.food_delivery_app.backend_user.controllers;
 import com.example.food_delivery_app.backend_user.services.CouponService;
 import com.example.food_delivery_app.dto.repsonse.ApiResponse;
 import com.example.food_delivery_app.dto.repsonse.MenuResponseDto;
-import com.example.food_delivery_app.dto.repsonse.DiscountResponeDto;
+import com.example.food_delivery_app.dto.repsonse.DiscountResponseDto;
+import com.example.food_delivery_app.shared.constants.ApiRoutes;
 import com.example.food_delivery_app.utils.enums.DiscountValue;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,12 @@ import java.util.Map;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/coupon")
+@RequestMapping(ApiRoutes.USER_COUPONS)
 public class CouponController {
     private final CouponService _discountService;
 
     @GetMapping("/greater-than-fifty")
-    public ResponseEntity<ApiResponse<List<DiscountResponeDto>>>
+    public ResponseEntity<ApiResponse<List<DiscountResponseDto>>>
             getResWhichDisGreaterThanFifty(Authentication auth){
         Map<String, Object> user =
                 (Map<String, Object>)
@@ -32,11 +33,11 @@ public class CouponController {
 
         var data =_discountService.getDiscountInfo(userId).stream()
                 .filter(x->x.getDiscountValue()>DiscountValue.FIFTY.getValue()).toList();
-        return ResponseEntity.ok(ApiResponse.<List<DiscountResponeDto>>builder()
+        return ResponseEntity.ok(ApiResponse.<List<DiscountResponseDto>>builder()
                 .success(true).message("fetch success").data(data).build());
     }
     @GetMapping("/greater-than-seventy")
-    public ResponseEntity<ApiResponse<List<DiscountResponeDto>>>
+    public ResponseEntity<ApiResponse<List<DiscountResponseDto>>>
     getResWhichDisGreaterThanSeventy(Authentication auth){
         Map<String, Object> user =
                 (Map<String, Object>)
@@ -46,12 +47,12 @@ public class CouponController {
 
         var data =_discountService.getDiscountInfo(userId)
                 .stream().filter(x->x.getDiscountValue()>DiscountValue.SEVENTY.getValue()).toList();
-        return ResponseEntity.ok(ApiResponse.<List<DiscountResponeDto>>builder()
+        return ResponseEntity.ok(ApiResponse.<List<DiscountResponseDto>>builder()
                 .success(true).message("fetch success").data(data).build());
     }
 
     @GetMapping("/greater-than-thirty")
-    public ResponseEntity<ApiResponse<List<DiscountResponeDto>>>
+    public ResponseEntity<ApiResponse<List<DiscountResponseDto>>>
     getResWhichDisLessThanThirty(Authentication auth){
         Map<String, Object> user =
                 (Map<String, Object>)
@@ -62,10 +63,10 @@ public class CouponController {
         var data =_discountService.getDiscountInfo(userId)
                 .stream().filter(x->x.getDiscountValue()>DiscountValue.THIRTY.getValue())
                 .toList();
-        return ResponseEntity.ok(ApiResponse.<List<DiscountResponeDto>>builder().success(true).message("fetch success").data(data).build());
+        return ResponseEntity.ok(ApiResponse.<List<DiscountResponseDto>>builder().success(true).message("fetch success").data(data).build());
     }
     @GetMapping("/greater-than-zero")
-    public ResponseEntity<ApiResponse<List<DiscountResponeDto>>>
+    public ResponseEntity<ApiResponse<List<DiscountResponseDto>>>
     getResWhichDisLessThanZero(Authentication auth){
         Map<String, Object> user =
                 (Map<String, Object>)
@@ -75,7 +76,7 @@ public class CouponController {
 
         var data =_discountService.getDiscountInfo(userId)
                 .stream().filter(x->x.getDiscountValue()> DiscountValue.ZERO.getValue()).toList();
-        return ResponseEntity.ok(ApiResponse.<List<DiscountResponeDto>>builder().success(true).message("fetch success").data(data).build());
+        return ResponseEntity.ok(ApiResponse.<List<DiscountResponseDto>>builder().success(true).message("fetch success").data(data).build());
     }
     @GetMapping("/dis-on-menu")
     public ResponseEntity<ApiResponse<List<MenuResponseDto>>> getDiscountOnMenu(Authentication auth){

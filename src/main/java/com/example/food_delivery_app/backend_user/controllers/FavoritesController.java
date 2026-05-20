@@ -1,6 +1,7 @@
 package com.example.food_delivery_app.backend_user.controllers;
 
 import com.example.food_delivery_app.backend_user.interfaces.IFavoritesService;
+import com.example.food_delivery_app.shared.constants.ApiRoutes;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("favorites")
+@RequestMapping(ApiRoutes.USER_FAVORITES)
 @AllArgsConstructor
 public class FavoritesController {
     private final ObjectMapper mapper = new ObjectMapper()

@@ -7,6 +7,7 @@ import com.example.food_delivery_app.backend_user.services.CouponAssignmentServi
 import com.example.food_delivery_app.backend_user.services.ExchangeRateService;
 import com.example.food_delivery_app.dto.repsonse.ApiResponse;
 import com.example.food_delivery_app.repositories.DeliveryRepository;
+import com.example.food_delivery_app.shared.constants.ApiRoutes;
 import com.example.food_delivery_app.utils.enums.PaymentMethod;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ import java.util.Map;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/cart")
+@RequestMapping(ApiRoutes.USER_CARTS)
 @AllArgsConstructor
 public class CartController {
     private final CouponAssignmentService couponAssignmentService;

@@ -1,6 +1,6 @@
 package com.example.food_delivery_app.backend_admin.services;
 
-import com.example.food_delivery_app.dto.repsonse.DiscountResponeDto;
+import com.example.food_delivery_app.dto.repsonse.DiscountResponseDto;
 import com.example.food_delivery_app.models.CouponModel;
 import com.example.food_delivery_app.repositories.CouponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -234,7 +234,7 @@ public class AdminCouponService {
         }
     }
 
-    public List<DiscountResponeDto> getDiscountInfo(int userId) {
+    public List<DiscountResponseDto> getDiscountInfo(int userId) {
         return couponRepository.getDiscountInfo(userId, LocalDateTime.now());
     }
 }

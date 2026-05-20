@@ -2,6 +2,7 @@ package com.example.food_delivery_app.backend_user.controllers;
 
 import com.example.food_delivery_app.backend_user.interfaces.ISaleService;
 import com.example.food_delivery_app.dto.repsonse.ViewHistOrderDto;
+import com.example.food_delivery_app.shared.constants.ApiRoutes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/checkout")
+@RequestMapping(ApiRoutes.USER_CHECKOUTS)
 @AllArgsConstructor
 public class CheckOutController {
     private final ISaleService saleService;

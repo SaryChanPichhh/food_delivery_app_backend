@@ -1,7 +1,7 @@
 package com.example.food_delivery_app.repositories;
 
  import com.example.food_delivery_app.dto.repsonse.MenuResponseDto;
- import com.example.food_delivery_app.dto.repsonse.DiscountResponeDto;
+ import com.example.food_delivery_app.dto.repsonse.DiscountResponseDto;
  import com.example.food_delivery_app.models.CouponModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -95,7 +95,7 @@ coupons.start_date as startDate,coupons.end_date as endDate,coupons.status as st
       AND coupons.end_date >= :now
       AND (coupons.max_usage IS NULL OR COALESCE(coupons.used_count, 0) < coupons.max_usage)
             """,nativeQuery=true)
-    List<DiscountResponeDto> getDiscountInfo(@Param("userId") int userId, @Param("now") LocalDateTime now);
+    List<DiscountResponseDto> getDiscountInfo(@Param("userId") int userId, @Param("now") LocalDateTime now);
 
 
     @Query(value = """

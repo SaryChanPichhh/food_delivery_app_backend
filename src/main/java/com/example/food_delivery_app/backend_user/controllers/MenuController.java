@@ -2,6 +2,7 @@ package com.example.food_delivery_app.backend_user.controllers;
 
 import com.example.food_delivery_app.backend_user.interfaces.IMenuService;
 import com.example.food_delivery_app.dto.repsonse.ApiResponse;
+import com.example.food_delivery_app.shared.constants.ApiRoutes;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/menu")
+@RequestMapping(ApiRoutes.USER_MENUS)
 @AllArgsConstructor
 public class MenuController {
     private final IMenuService _menuService;

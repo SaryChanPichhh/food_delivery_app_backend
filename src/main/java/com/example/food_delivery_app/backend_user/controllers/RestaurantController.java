@@ -3,6 +3,7 @@ package com.example.food_delivery_app.backend_user.controllers;
 import com.example.food_delivery_app.backend_user.interfaces.IRestaurantService;
 import com.example.food_delivery_app.dto.repsonse.ApiResponse;
 import com.example.food_delivery_app.dto.repsonse.RestaurantResponseDto;
+import com.example.food_delivery_app.shared.constants.ApiRoutes;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,7 +15,7 @@ import java.util.Comparator;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/restaurant")
+@RequestMapping(ApiRoutes.USER_RESTAURANTS)
 @AllArgsConstructor
 public class RestaurantController {
     private final IRestaurantService _restaurantService;
@@ -35,7 +36,16 @@ public class RestaurantController {
                 .toList();
         return ResponseEntity.ok(ApiResponse.builder().data(data).success(true).message("fetch success").build());
     }
-
+    @GetMapping("/new-restaurants")
+    public ResponseEntity<?> getNewRestaurant(Authentication auth){
+        Map<String, Object> user =
+                (Map<String, Object>)
+                        auth.getPrincipal();
+        Integer userId =
+                (Integer) user.get("userId");
+        var data = _restaurantService.GetNewRestaurant(userId);
+        return ResponseEntity.ok(ApiResponse.builder().data(data).success(true).message("fetch success").build());
+    }
     @GetMapping("")
     public ResponseEntity<?> getAllRestaurant(Authentication auth){
         Map<String, Object> user =

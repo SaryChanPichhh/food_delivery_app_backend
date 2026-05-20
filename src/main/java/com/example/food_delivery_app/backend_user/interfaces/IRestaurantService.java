@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface IRestaurantService extends IBasedService<RestaurantModel> {
     List<RestaurantResponseDto> GetPopularRestaurant(int userId);
+    List<RestaurantResponseDto> GetNewRestaurant(int userId);
     List<RestaurantModel> GetResWhichGotDiscount();
 }
